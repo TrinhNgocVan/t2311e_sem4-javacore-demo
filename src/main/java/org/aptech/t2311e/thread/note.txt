@@ -1,0 +1,9 @@
+Thread : Đơn vị nhỏ nhất của 1 chương trình thực thi 1 tác vụ độc lập
+Process : 1 chương trình đang chạy , gồm 1  hoặc nhiều thread
+Multi threading  (Đa luồng) : Chạy song song nhiều luồng trên cùng 1 chương trình
+Multi Task (Đa nhiệm) : Chạy nhiều chương trình trên cùng 1 hệ điều hành
+Cách tạo luồng :
+1. Kế thừa lớp Thread
+2. Implement interface Runable
+
+// Dependencies injection - design pattern
