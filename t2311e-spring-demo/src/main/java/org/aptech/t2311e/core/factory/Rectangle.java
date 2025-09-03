@@ -1,4 +1,4 @@
-package org.aptech.t2311e.designPattern.factory;
+package org.aptech.t2311e.core.factory;
 
 public class Rectangle implements Shape{
     private double width;

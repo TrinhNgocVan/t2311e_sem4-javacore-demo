@@ -1,4 +1,4 @@
-package org.aptech.t2311e.service;
+package org.aptech.t2311e.core.service;
 
 public interface TransactionService {
     void deposit(String depositType, long  amount, int accountId);

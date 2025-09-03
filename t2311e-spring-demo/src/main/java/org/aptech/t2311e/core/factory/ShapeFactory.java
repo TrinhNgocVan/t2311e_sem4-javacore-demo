@@ -1,6 +1,4 @@
-package org.aptech.t2311e.designPattern.factory;
-
-import java.util.Locale;
+package org.aptech.t2311e.core.factory;
 
 public class ShapeFactory {
     public Shape getShape(String shapeType, double... params){
