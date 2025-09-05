@@ -1,6 +1,5 @@
-
 services:
-  prometheus:
+  prometheus: # database (timeseries) - luu tru du lieu monitor , bussiness (ko toi uu hoa luu lau dai - 14d clean)
     image: prom/prometheus:latest
     container_name: t2311e_prometheus
     volumes:
@@ -28,14 +27,22 @@ services:
     container_name: grafana
     ports:
       - "3000:3000"
-    depends_on:
-      - influxdb
+#    depends_on:
+#      - influxdb
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin@123
     volumes:
       - grafana-storage:/var/lib/grafana
-
+  postgres:
+    image: postgres:15
+    container_name: t2311e-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin@123
+      POSTGRES_DB: t2311e_db
+    ports:
+      - "5432:5432"
 volumes:
   influxdb-data:
   grafana-storage:
