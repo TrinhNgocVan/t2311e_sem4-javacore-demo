@@ -1,16 +1,19 @@
 package org.aptech.t2311e.service;
 
 
-import org.aptech.t2311e.model.StudentExam;
+import org.aptech.t2311e.dto.StudentExamDto;
+import org.aptech.t2311e.entity.StudentExam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface StudentExamService {
-    List<StudentExam> getAll();
-    StudentExam getById(Long id);
-    StudentExam add(StudentExam studentExam);
-    StudentExam update(StudentExam studentExam);
+    List<StudentExamDto> getAll();
+    Optional<StudentExamDto> getById(Long id);
+//    StudentExamDto getById(Long id);
+    StudentExamDto add(StudentExamDto studentExam);
+    StudentExamDto update(StudentExamDto studentExam);
     Boolean delete(Long id);
 }
