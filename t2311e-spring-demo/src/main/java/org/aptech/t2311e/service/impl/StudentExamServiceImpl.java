@@ -2,10 +2,12 @@ package org.aptech.t2311e.service.impl;
 
 import io.micrometer.common.util.StringUtils;
 import org.aptech.t2311e.dto.StudentExamDto;
+import org.aptech.t2311e.dto.StudentExamSearchDto;
 import org.aptech.t2311e.entity.StudentExam;
 import org.aptech.t2311e.mapper.StudentExamMapper;
 import org.aptech.t2311e.repository.StudentExamRepository;
 import org.aptech.t2311e.service.StudentExamService;
+import org.aptech.t2311e.specification.StudentExamSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,14 @@ public class StudentExamServiceImpl implements StudentExamService {
     @Override
     public Optional<StudentExamDto> getById(Long id) {
         return studentExamRepository.findById(id).map(mapper::entityToDto);
+    }
+
+    @Override
+    public List<StudentExamDto> search(StudentExamSearchDto criteria) {
+        return studentExamRepository.findAll(StudentExamSpecification.filter(criteria))
+                .stream()
+                .map(mapper::entityToDto)
+                .toList();
     }
 //    @Override
 //    public StudentExamDto getById(Long id) {

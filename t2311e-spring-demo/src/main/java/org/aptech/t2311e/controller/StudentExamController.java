@@ -2,6 +2,7 @@ package org.aptech.t2311e.controller;
 
 
 import org.aptech.t2311e.dto.StudentExamDto;
+import org.aptech.t2311e.dto.StudentExamSearchDto;
 import org.aptech.t2311e.entity.StudentExam;
 import org.aptech.t2311e.service.StudentExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,11 @@ public class StudentExamController {
 //        }
 //        return ResponseEntity.ok(exam);
 
+    }
+
+    @PostMapping
+    public ResponseEntity<List<StudentExamDto>> search(@RequestBody StudentExamSearchDto criteria){
+        return ResponseEntity.ok(studentExamService.search(criteria));
     }
 
 
