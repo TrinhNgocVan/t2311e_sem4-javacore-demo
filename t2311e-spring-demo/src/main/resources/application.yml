@@ -1,5 +1,18 @@
 server:
-  port: 8080
+  port: 8001
 spring:
   application:
     name: SpringBootApiApplication
+  # datasource config (auto config)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/t2311e_db
+    username: admin
+    password: admin@123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+        # update: UPDATE schema db , create: create table, validate : validate schema ..
+      show-sql: true
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+

@@ -1,32 +1,27 @@
 package org.aptech.t2311e.controller;
 
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
+import org.apache.coyote.Response;
+import org.aptech.t2311e.model.StudentExam;
+import org.aptech.t2311e.service.StudentExamService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 // Restfull  , Soap ...
 @RestController
 //@Scope("prototype")
-public class HelloController {
-    // POJO
-    Thread a ;
-    // init thread a when bean HelloController inited
-    @PostConstruct
-    public void initThreadA(){
-        // init datasource
-//        System.err.println("Init connection to datasource successfull");
-        System.err.println("Init connection to datasource failed");
-        System.exit(1);
-    }
-    @PreDestroy
-    public void returnThreadA(){
-        System.err.println("Bean HelloController destroy successful");
-    }
+public class StudentExamController {
+    @Autowired
+    StudentExamService studentExamService;
+
 
 
     public static void main(String[] args) {
-        HelloController helloController = new HelloController(); // POJO
+        StudentExamController studentExamController = new StudentExamController(); // POJO
         /*
         why ?
         - ko can tight coupling code ( helloController = new HelloController();)
@@ -51,9 +46,10 @@ public class HelloController {
          */
     }
 
-//    @GetMapping("/api/hello")
-    public String helloApi(){
-        return "Hello World";
+    @GetMapping("/api/student/exams")
+    public ResponseEntity<List<StudentExam>> getAll(){
+        List<StudentExam> studentExams = studentExamService.getAll();
+        return ResponseEntity.ok(studentExams);
     }
 
 }
