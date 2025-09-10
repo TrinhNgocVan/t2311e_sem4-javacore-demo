@@ -1,6 +1,7 @@
 package org.aptech.t2311e.service.impl;
 
 import io.micrometer.common.util.StringUtils;
+import org.aptech.t2311e.dto.PageDto;
 import org.aptech.t2311e.dto.StudentExamDto;
 import org.aptech.t2311e.dto.StudentExamSearchDto;
 import org.aptech.t2311e.entity.StudentExam;
@@ -9,10 +10,14 @@ import org.aptech.t2311e.repository.StudentExamRepository;
 import org.aptech.t2311e.service.StudentExamService;
 import org.aptech.t2311e.specification.StudentExamSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,11 +56,20 @@ public class StudentExamServiceImpl implements StudentExamService {
     }
 
     @Override
-    public List<StudentExamDto> search(StudentExamSearchDto criteria) {
-        return studentExamRepository.findAll(StudentExamSpecification.filter(criteria))
-                .stream()
-                .map(mapper::entityToDto)
-                .toList();
+    public PageDto search(StudentExamSearchDto criteria) {
+        Pageable pageable = PageRequest.of(
+                criteria.getPageNumber(),  // fixme  : co dk gia tri mac dinh
+                criteria.getPageSize(),
+                Sort.by("createdAt").descending());
+        var page =  studentExamRepository.findAll(StudentExamSpecification.filter(criteria),pageable);
+        return PageDto
+                .builder()
+                .data(page.getContent())
+                .totalPages(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .numberOfElements(page.getNumberOfElements())
+                .number(page.getNumber())
+                .build();
     }
 //    @Override
 //    public StudentExamDto getById(Long id) {
