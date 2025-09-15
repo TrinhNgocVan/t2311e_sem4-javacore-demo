@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class StudentExamServiceImpl implements StudentExamService {
     StudentExamRepository studentExamRepository;
     @Autowired
     StudentExamMapper mapper;
+    @Autowired
+    RedisTemplate<String,Object> redisTemplate;
+
 
     @Override
     public List<StudentExamDto> getAll() {
@@ -57,19 +61,20 @@ public class StudentExamServiceImpl implements StudentExamService {
 
     @Override
     public PageDto search(StudentExamSearchDto criteria) {
-        Pageable pageable = PageRequest.of(
-                criteria.getPageNumber(),  // fixme  : co dk gia tri mac dinh
-                criteria.getPageSize(),
-                Sort.by("createdAt").descending());
-        var page =  studentExamRepository.findAll(StudentExamSpecification.filter(criteria),pageable);
-        return PageDto
-                .builder()
-                .data(page.getContent())
-                .totalPages(page.getTotalPages())
-                .totalElements(page.getTotalElements())
-                .numberOfElements(page.getNumberOfElements())
-                .number(page.getNumber())
-                .build();
+            Pageable pageable = PageRequest.of(
+                    criteria.getPageNumber(),  // fixme  : co dk gia tri mac dinh
+                    criteria.getPageSize(),
+                    Sort.by("createdAt").descending());
+            var page =  studentExamRepository.findAll(StudentExamSpecification.filter(criteria),pageable);
+            redisTemplate.opsForValue().set("test data", page);
+            return PageDto
+                    .builder()
+                    .data(page.getContent())
+                    .totalPages(page.getTotalPages())
+                    .totalElements(page.getTotalElements())
+                    .numberOfElements(page.getNumberOfElements())
+                    .number(page.getNumber())
+                    .build();
     }
 //    @Override
 //    public StudentExamDto getById(Long id) {

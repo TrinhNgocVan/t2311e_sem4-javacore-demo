@@ -43,6 +43,13 @@ services:
       POSTGRES_DB: t2311e_db
     ports:
       - "5432:5432"
+  # todo : add redis setup container
+  redis:
+    image: redis:7.2
+    container_name: t2311e-redis
+    ports:
+      - '6379:6379'
+    command: ["redis-server" ,"--requirepass", "admin@123" ]
 volumes:
   influxdb-data:
   grafana-storage:
