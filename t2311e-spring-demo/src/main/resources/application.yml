@@ -27,6 +27,14 @@ spring:
     hibernate:
       ddl-auto: update
         # update: UPDATE schema db , create: create table, validate : validate schema ..
-
       dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
 

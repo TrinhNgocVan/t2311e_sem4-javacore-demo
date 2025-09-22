@@ -1,9 +1,6 @@
 package org.aptech.t2311e.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,10 +23,7 @@ public class ClassRoomDto {
     private LocalDate startTime;
     private LocalDate endTime;
     private Integer currentSemester;
+    @JsonIgnore  // khi truyen qua http -> ko tra ra o api
     private List<Student> students = new ArrayList<>();
-    private Integer numberOfStudents;
-
-    private Integer getNumberOfStudents(){
-        return this.students.size();
-    }
+    private Long numberOfStudents;
 }

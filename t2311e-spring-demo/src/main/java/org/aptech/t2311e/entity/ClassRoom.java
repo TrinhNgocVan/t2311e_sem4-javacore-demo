@@ -45,4 +45,18 @@ public class ClassRoom {
     , cascade = CascadeType.ALL, orphanRemoval = true
     )
     private List<Student> students = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "ClassRoom{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", currentSemester=" + currentSemester +
+//                ", students=" + students + // fixme  : n+1 issues : hibernate ngam dinh hieu ta cac danh sach hoc sinh trong lop
+                '}';
+    }
 }
