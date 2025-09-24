@@ -3,6 +3,7 @@ package org.aptech.t2311e.controller;
 import org.aptech.t2311e.dto.ClassRoomDto;
 import org.aptech.t2311e.dto.ClassRoomSearchDto;
 import org.aptech.t2311e.dto.PageDto;
+import org.aptech.t2311e.exception.BussinessException;
 import org.aptech.t2311e.service.ClassRoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +34,11 @@ public class ClassRoomController {
     // (ví dụ trùng tên , mã lớp , thời gian bắt đầu ở tương lai ,
     // thời gian kết thúc ở quá khứ ...)
 
-    @PostMapping("/clasroom")
-    public ResponseEntity<?> add(@RequestBody ClassRoomDto classRoom){
+    @PostMapping("/classroom")
+    public ResponseEntity<?> add(@RequestBody ClassRoomDto classRoom) throws BussinessException {
         logger.info("Insert new classroom by code : {} , detail info {}",classRoom.getCode()
                 , classRoom);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(classRoomService.insert(classRoom));
     }
-
 
 }

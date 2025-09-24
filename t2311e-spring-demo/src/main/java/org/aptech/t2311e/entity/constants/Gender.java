@@ -1,4 +1,4 @@
-package org.aptech.t2311e.entity;
+package org.aptech.t2311e.entity.constants;
 
 public enum Gender {
     MALE(1),

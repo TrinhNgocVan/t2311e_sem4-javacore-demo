@@ -25,7 +25,7 @@ spring:
       hibernate:
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
         # update: UPDATE schema db , create: create table, validate : validate schema ..
       dialect: org.hibernate.dialect.PostgreSQLDialect
 logging:
