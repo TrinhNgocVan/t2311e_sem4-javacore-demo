@@ -5,9 +5,12 @@ import org.aptech.t2311e.dto.ClassRoomSearchDto;
 import org.aptech.t2311e.dto.PageDto;
 import org.aptech.t2311e.exception.BussinessException;
 
+import java.util.List;
+
 public interface ClassRoomService {
-    public PageDto search(ClassRoomSearchDto criteria);
-    public boolean insert(ClassRoomDto classRoom) throws BussinessException;
+    PageDto search(ClassRoomSearchDto criteria);
+    boolean insert(ClassRoomDto classRoom) throws BussinessException;
+    boolean insert(List<ClassRoomDto> classRoom) throws BussinessException;
 
 
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class ClassRoomController {
@@ -40,5 +42,12 @@ public class ClassRoomController {
                 , classRoom);
         return ResponseEntity.ok(classRoomService.insert(classRoom));
     }
+
+    @PostMapping("/add-classrooms")
+    public ResponseEntity<?> add(@RequestBody List<ClassRoomDto> classRooms) throws BussinessException {
+        logger.debug("Get request insert list classrooms : {}",classRooms );
+        return ResponseEntity.ok(classRoomService.insert(classRooms));
+    }
+
 
 }
