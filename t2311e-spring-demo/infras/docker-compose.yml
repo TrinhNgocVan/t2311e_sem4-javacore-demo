@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: t2311e-01-postgres
+    env_file:
+      - .env
+    networks:
+      - t2311e
+      # chi cac service ben trong network moi call dc, call thong qua service name
+    ports:
+      - "5433:5432"
+networks:
+  t2311e:
+    external: true # de cho khi chay compose ko khoi tao network moi dung cai da co
+

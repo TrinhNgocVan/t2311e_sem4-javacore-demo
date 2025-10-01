@@ -1,0 +1,15 @@
+1. NGINX
+  -  REVERSE PROXY : Chuyển hướng request đến service backend
+  request A -> nginx   ->  service BE B
+  -  SSL : Https
+  -  ROUTING: vd api/v1/user   -> user-service , api/v1/payment  -> payment-service
+  -  Load Balancing
+  -  Ít khi dùng làm service authen (auth, jwt .... )
+USERCASE :
+   1 sản phẩm vừa với 1 vài service triển khai trên 1 máy chủ
+   => Mọi request đều đi qua nginx (máy chủ ấy chỉ chủ yếu mở 2 port của nginx  : 80, 443)
+   (tấn công mạng : port)
+
+Các bước cài đặt hệ thống :
+ 1. Tạo tay network t2311e
+
