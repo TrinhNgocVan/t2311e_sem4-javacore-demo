@@ -1,14 +1,37 @@
 services:
-  postgres:
+  postgres_t2311e:
     image: postgres:15
     container_name: t2311e-01-postgres
+    extends: # kế thừa cấu hình từ 1 service khác có thể ở trên 1 file khác
+      file: ./common.yml
+      service: common
     env_file:
       - .env
+#    network_mode: host  -> mount truc tiep vao host network
+#    network_mode: bridge
     networks:
       - t2311e
       # chi cac service ben trong network moi call dc, call thong qua service name
+#    ports:
+#      - "5433:5432"
+  springdemo:
+    image: t2311e-spring-demo:1.0
+    container_name: t2311e_spring_demo
+    networks:
+      - t2311e
+  nginx:
+    image: nginx:latest
+    container_name:  t2311e_nginx
     ports:
-      - "5433:5432"
+      - "80:80"
+      - "443:443"
+    networks:
+      - t2311e
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html:ro
+      - ./nginx/nginx_01.conf:/etc/nginx/nginx_01.conf:ro
+      - ./nginx/logs:/var/log/nginx
+
 networks:
   t2311e:
     external: true # de cho khi chay compose ko khoi tao network moi dung cai da co

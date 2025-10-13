@@ -1,0 +1,7 @@
+services:
+  common:
+    image: alpine
+    environment:
+      - TZ=Asia/Ho_Chi_Minh  # ko bao h sai lech mui gio giua cac service
+#    extra_hosts:
+#      - t2311e.net: 192.168.39.6
